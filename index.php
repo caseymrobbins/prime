@@ -59,18 +59,42 @@ function findPreviousPrime($number) {
 
     return "No previous prime found";
 }
-
-// Example usage
-$givenNumber = 17; // Replace this with your own number
-if (isPrime($givenNumber)) {
-    echo "$givenNumber is a prime number.";
-} else {
-    $nextPrime = findNextPrime($givenNumber);
-    $previousPrime = findPreviousPrime($givenNumber);
-
-    echo "$givenNumber is not a prime number.\n";
-    echo "Next prime: $nextPrime\n";
-    echo "Previous prime: $previousPrime\n";
-}
-
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Checker</title>
+</head>
+<body>
+
+<h1>Prime Checker</h1>
+
+<form method="post">
+    <label for="number">Enter a number:</label>
+    <input type="number" name="number" id="number" required>
+    <button type="submit">Check</button>
+</form>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if the form is submitted
+    $givenNumber = isset($_POST['number']) ? intval($_POST['number']) : 0;
+
+    if (isPrime($givenNumber)) {
+        echo "<p>$givenNumber is a prime number.</p>";
+    } else {
+        $nextPrime = findNextPrime($givenNumber);
+        $previousPrime = findPreviousPrime($givenNumber);
+
+        echo "<p>$givenNumber is not a prime number.</p>";
+        echo "<p>Next prime: $nextPrime</p>";
+        echo "<p>Previous prime: $previousPrime</p>";
+    }
+}
+?>
+
+</body>
+</html>
